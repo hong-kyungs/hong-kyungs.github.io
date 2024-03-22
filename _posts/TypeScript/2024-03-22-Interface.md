@@ -27,32 +27,31 @@ sidebar:
 
 ## 인터페이스 사용하기
 
-
 ```jsx
-let user:object;
+let user: object
 
 user = {
-  name: "DO",
-  age: 30
+  name: 'DO',
+  age: 30,
 }
 
-console.log(user.name); //Property 'name' does not exist on type 'object'.
+console.log(user.name) //Property 'name' does not exist on type 'object'.
 ```
 
 user라는 오브젝트에 name이라는 프로퍼티가 없다는 에러가 발생합니다.. 프로퍼티를 정의해서 오브젝트를 표현하고자 할 때는 인터페이스를 사용합니다.
 
 ```ts
 interface User {
-  name: string,
+  name: string
   age: number
 }
 
-let user:User =  {
-  name: "DO",
-  age: 30
+let user: User = {
+  name: 'DO',
+  age: 30,
 }
 
-console.log(user.name); // "DO"
+console.log(user.name) // "DO"
 ```
 
 인터페이스를 사용하면 더이상 에러가 발생하지 않습니다.
@@ -63,7 +62,7 @@ console.log(user.name); // "DO"
 
 ```ts
 interface 인터페이스_이름 {
-  속성?: 타입;
+  속성?: 타입
 }
 ```
 
@@ -71,29 +70,29 @@ interface 인터페이스_이름 {
 
 ```ts
 interface User {
-  name: string,
-  age: number,
-  gender: string,
+  name: string
+  age: number
+  gender: string
 }
 
-let user:User =  {
-  name: "DO",
-  age: 30
-} 
-// Property 'gender' is missing in type '{ name: string; age: number; }' 
+let user: User = {
+  name: 'DO',
+  age: 30,
+}
+// Property 'gender' is missing in type '{ name: string; age: number; }'
 // but required in type 'User'.
 ```
 
 ```ts
 interface User {
-  name: string,
-  age: number,
-  gender?: string,
+  name: string
+  age: number
+  gender?: string
 }
 
-let user:User =  {
-  name: "DO",
-  age: 30
+let user: User = {
+  name: 'DO',
+  age: 30,
 }
 ```
 
@@ -109,37 +108,35 @@ interface User {
 }
 ```
 
-최초에 생성할 때만 할당이 가능하고 이 후에는 수정할 수 없습니다. 인터페이스로 객체를 선언하고 나서 수정하려고 하면 아래와 같이 오류가 납니다. 
+최초에 생성할 때만 할당이 가능하고 이 후에는 수정할 수 없습니다. 인터페이스로 객체를 선언하고 나서 수정하려고 하면 아래와 같이 오류가 납니다.
 
 ```ts
-let user:User =  {
-  birthYear: 2000
+let user: User = {
+  birthYear: 2000,
 }
-user.birthYear = 1999; // Cannot assign to 'birthYear' because it is a read-only property.
+user.birthYear = 1999 // Cannot assign to 'birthYear' because it is a read-only property.
 ```
 
 ## **읽기 전용 배열**
 
-
 배열을 선언할 때 `ReadonlyArray<T>` 타입을 사용하면 읽기 전용 배열을 생성할 수 있습니다.
 
 ```ts
-let arr: ReadonlyArray<number> = [1,2,3];
-arr.splice(0,1); // error
-arr.push(4); // error
-arr[0] = 100; // error
+let arr: ReadonlyArray<number> = [1, 2, 3]
+arr.splice(0, 1) // error
+arr.push(4) // error
+arr[0] = 100 // error
 ```
 
 위처럼 배열을 `ReadonlyArray`로 선언하면 배열의 내용을 변경할 수 없습니다. 선언하는 시점에만 값을 정의할 수 있으니 주의해서 사용하세요.
 
 ## Index signature
 
-
 때로는 타입의 모든 속성 이름을 미리 알 수 없지만 값의 형태는 알고 있는 경우 사용됩니다. 즉, 모든 속성의 이름과 타입을 정확히 알지 못해도 그 형태만을 알고 있다면 해당 형태에 대한 타입을 지정할 수 있는 것을 의미합니다.
 
 ```ts
 interface SomeType {
-  [key: number]: string;
+  [key: number]: string
 }
 ```
 
@@ -153,33 +150,32 @@ Index Signatures는 TypeScript에서 객체의 속성을 동적으로 정의하�
 
 ```ts
 interface User {
-  [grade: number]: string,
+  [grade: number]: string
 }
 
-let user:User =  {
+let user: User = {
   1: 'A',
-  2: 'B'
+  2: 'B',
 }
 ```
 
 ## Literal Types
 
-
-TypeScript에 문자열이나 숫자에 정확한 값을 지정하여 더 엄격한 타입을 지정하는 것으로, 지정한 값 자체를 타입으로 지정하는 기능입니다. 
+TypeScript에 문자열이나 숫자에 정확한 값을 지정하여 더 엄격한 타입을 지정하는 것으로, 지정한 값 자체를 타입으로 지정하는 기능입니다.
 
 위에 예제에서 성적을 string으로 하기에는 너무 광범위하므로, 성적을 A, B, C, F 로 지정해 줄 수 있습니다.
 
 ```ts
-type Score = 'A' | 'B' | 'C' | 'F';
+type Score = 'A' | 'B' | 'C' | 'F'
 
 interface User {
-  [grade: number]: Score,
+  [grade: number]: Score
 }
 
-let user:User =  {
+let user: User = {
   1: 'A',
   2: 'B',
-  3: 'D' //Type '"D"' is not assignable to type 'Score'.
+  3: 'D', //Type '"D"' is not assignable to type 'Score'.
 }
 ```
 
@@ -187,22 +183,21 @@ Score에서 지정한 문자열 외에 다른 문자열을 사용하게 되면 �
 
 ## 함수 타입
 
-
 인터페이스로 함수를 정의할 수도 있다. 함수형 인터페이스를 사용하여 함수의 형태를 명시하고, 해당 형태를 따르는 함수를 구현할 수 있습니다.
 
 ### 📌 예제 1 : 숫자를 더하는 함수
 
 ```ts
 interface Add {
-    (num1: number, num2: number) : number 
+  (num1: number, num2: number): number
 }
 ```
 
 Add 인터페이스는 두 개의 숫자를 입력으로 받아들이고, 숫자를 반환하는 함수의 형태를 나타냅니다. 이제 이 인터페이스를 구현하는 함수는 다음과 같이 정의할 수 있습니다:
 
 ```ts
-const add: Add = function(x, y) {
-    return x + y;
+const add: Add = function (x, y) {
+  return x + y
 }
 
 add(10, 20)
@@ -212,19 +207,18 @@ add(10, 20)
 
 ```ts
 interface IsAdult {
-    (age: number):boolean
+  (age: number): boolean
 }
 
 const a: IsAdult = (age) => {
-    return age > 19
+  return age > 19
 }
 
-a(33); // true
-a(10); // false
+a(33) // true
+a(10) // false
 ```
 
 ## 클래스 타입
-
 
 C#이나 자바처럼 타입스크립트에서도 클래스가 일정 조건을 만족하도록 타입 규칙을 정할 수 있습니다.
 
@@ -234,76 +228,75 @@ Car 라는 인터페이스를 정의하고, 이 Car 인터페이스를 통해서
 
 ```ts
 interface Car {
-    color: string,
-    wheels: number,
-    start(): void,
+  color: string
+  wheels: number
+  start(): void
 }
 
 class Bmw implements Car {
-    color = "pink";
-    wheels = 4;
-    start(){
-        console.log('Go...')
-    }
+  color = 'pink'
+  wheels = 4
+  start() {
+    console.log('Go...')
+  }
 }
 
-const b = new Bmw;
-console.log(b); // Bmw: { "color": "pink", "wheels": 4} 
-b.start(); // "Go..." 
+const b = new Bmw()
+console.log(b) // Bmw: { "color": "pink", "wheels": 4}
+b.start() // "Go..."
 ```
 
 📌 예제 2. 생성될 때 색상 입력받기
 
 ```ts
 interface Car {
-    color: string,
-    wheels: number,
-    start(): void,
+  color: string
+  wheels: number
+  start(): void
 }
 
 class Bmw implements Car {
-    color;
-    wheels = 4;
-    constructor(c: string){
-        this.color = c;
-    }
-    start(){
-        console.log('Go...')
-    }
+  color
+  wheels = 4
+  constructor(c: string) {
+    this.color = c
+  }
+  start() {
+    console.log('Go...')
+  }
 }
 
-const b = new Bmw('pink');
-console.log(b); // Bmw: { "wheels": 4, "color": "pink"} 
-b.start(); // "Go..."
+const b = new Bmw('pink')
+console.log(b) // Bmw: { "wheels": 4, "color": "pink"}
+b.start() // "Go..."
 ```
 
 ## 인터페이스 확장(extends)
-
 
 클래스와 마찬가지로 인터페이스도 인터페이스 간 확장이 가능합니다.
 
 ```ts
 interface Car {
-    color: string,
-    wheels: number,
-    start(): void,
+  color: string
+  wheels: number
+  start(): void
 }
 
 interface Benz extends Car {
-    door: number,
-    stop():void
+  door: number
+  stop(): void
 }
 
 const benz: Benz = {
-    color: 'purple',
-    wheels: 4,
-    start(){
-        console.log('Go...')
-    },
-    door: 4,
-    stop(){
-        console.log('Stop...')
-    }
+  color: 'purple',
+  wheels: 4,
+  start() {
+    console.log('Go...')
+  },
+  door: 4,
+  stop() {
+    console.log('Stop...')
+  },
 }
 ```
 
@@ -311,24 +304,33 @@ const benz: Benz = {
 
 ```ts
 interface Car {
-    color: string,
-    wheels: number,
-    start(): void,
+  color: string
+  wheels: number
+  start(): void
 }
 
 interface Toy {
-    name: string
+  name: string
 }
 
 interface ToyCar extends Car, Toy {
-    price: number
+  price: number
 }
 
 const mini: ToyCar = {
-    color: 'pink',
-    wheels: 4,
-    start(){ console.log('Go!')},
-    name: 'Cooper',
-    price: 5000
+  color: 'pink',
+  wheels: 4,
+  start() {
+    console.log('Go!')
+  },
+  name: 'Cooper',
+  price: 5000,
 }
 ```
+
+### 참조
+
+---
+
+[코딩앙마](https://www.youtube.com/watch?v=OIMPLNICzoc&list=PLZKTXPmaJk8KhKQ_BILr1JKCJbR0EGlx0&index=3)  
+https://joshua1988.github.io/ts/guide/interfaces.html
