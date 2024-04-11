@@ -34,7 +34,7 @@ Webpack은 여러 개의 모듈(javascript, css, html, image 등)을 하나의 j
 npm init
 ```
 
-  <img src="/assets/images/2023-02-12/1.png" width="300" height="200"/>
+  <img src="../assets/images/2023-02-12/1.png" width="300" height="200"/>
 
 package name, author, license를 작성하고 yes 하면, package.json 파일이 생긴다.
 
@@ -54,7 +54,7 @@ npm i -D webpack webpack-cli
 
 package.json에서 react와 webpack이 설치되었음을 확인할 수 있다.
 
-<img src="/assets/images/2023-02-12/2.png" width="200" height="150"/>
+<img src="../assets/images/2023-02-12/2.png" width="200" height="150"/>
 
 ---
 
@@ -210,6 +210,6 @@ babel-loader와 @babel/core는 필수이고, 나머지 preset은 선택입니다
 
 webpack.config.js 파일에 entry와 output사이에 module을 추가한다.
 
-<img src="/assets/images/2023-02-12/4.png" width="250" height="350"/>
+<img src="../assets/images/2023-02-12/4.png" width="250" height="350"/>
 
 위와 같이 하면 **test** 정규식조건(js나 jsx 파일)에 부합하는 파일들을 loader에 지정한 로더가 컴파일해줍니다. **options**는 로더에 대한 옵션으로 설치한 presets들을 적용하고 있고, 그 옵션들 안에서도 옵션을 설정해줄 수 있다. @babel/preset-env는 옛날 브라우저는 지원해주는데, **targets** 를 넣어 좀 더 구체적으로 설정해줄 수 있다. 필자는 `browsers: ['> 1% in KR']`를 넣어 한국에서 사용하는 1% 이상의 브라우저로 설정했다.
